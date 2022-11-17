@@ -1,6 +1,6 @@
 ## METERING
 output "metering_token" {
-  value = module.meshcloud-service-account-meshfed-metering.token_metering
+  value     = module.meshcloud-service-account-meshfed-metering.token_metering
   sensitive = true
 }
 
@@ -12,7 +12,7 @@ output "metering_expose_token" {
 ## REPLICATOR
 
 output "replicator_token" {
-  value = module.meshcloud-service-account-meshfed-replicator.token_replicator
+  value     = module.meshcloud-service-account-meshfed-replicator.token_replicator
   sensitive = true
 }
 
