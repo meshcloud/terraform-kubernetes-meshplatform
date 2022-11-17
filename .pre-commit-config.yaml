@@ -8,6 +8,3 @@ repos:
     hooks:
         - id: terraform_fmt
         - id: terraform_validate
-        - id: terraform_docs
-          args:
-            - --args=--config=.terraform-docs.yml
