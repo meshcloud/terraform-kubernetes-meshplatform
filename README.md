@@ -6,7 +6,8 @@ Terraform module to integrate Kubernetes as a meshPlatform into meshStack instan
 
 To run this module, you need the following:
 
-- Cluster admin permissions
+- An AKS cluster with [Azure AD enabled](https://learn.microsoft.com/en-us/azure/aks/managed-aad)
+- cluster admin permissions on the cluster
 - [Terraform installed](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 - [kubectl installed](https://kubernetes.io/docs/tasks/tools/#kubectl)
 
@@ -18,8 +19,8 @@ To run this module, you need the following:
 
     ```powershell
     # Downloads main.tf and outputs.tf files into ~/terraform-kubernetes-meshplatform
-    wget https://raw.githubusercontent.com/meshcloud/terraform-kubernetes-meshplatform/main/examples/basic-aks-integration/main.tf -P ~/terraform-kubernetes-meshplatform
-    wget https://raw.githubusercontent.com/meshcloud/terraform-kubernetes-meshplatform/main/examples/basic-aks-integration/outputs.tf -P ~/terraform-kubernetes-meshplatform
+    wget https://raw.githubusercontent.com/meshcloud/terraform-kubernetes-meshplatform/main/examples/basic-kubernetes-integration/main.tf -P ~/terraform-kubernetes-meshplatform
+    wget https://raw.githubusercontent.com/meshcloud/terraform-kubernetes-meshplatform/main/examples/basic-kubernetes-integration/outputs.tf -P ~/terraform-kubernetes-meshplatform
     ```
 
 2. Open `~/terraform-kubernetes-meshplatform/main.tf` with a text editor. Modify the module variables and Terraform state backend settings in the file.
@@ -42,4 +43,4 @@ To run this module, you need the following:
 
 ## Example Usages
 
-Check [examples](./examples/) for different use cases. As a quick start for AKS we recommend using [basic-aks-integration](./examples/basic-azure-integration) example.
+Check [examples](./examples/) for examples.
