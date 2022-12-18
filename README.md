@@ -1,6 +1,6 @@
 # Kubernetes meshPlatform Module
 
-Terraform module to integrate Kubernetes as a meshPlatform into meshStack instance. With this module, service accounts used by meshStack are created with the required permissions.
+Terraform module to integrate Kubernetes as a meshPlatform into meshStack instance. The output of this module is a set of Service Account credentials that need to be configured in meshStack as described in [meshcloud public docs](https://docs.meshcloud.io/docs/meshstack.how-to.integrate-meshplatform.html).
 
 ## Prerequisites
 
