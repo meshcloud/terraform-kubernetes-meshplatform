@@ -4,12 +4,15 @@ Terraform module to integrate Kubernetes as a meshPlatform into meshStack instan
 
 ## Prerequisites
 
-To run this module, you need the following:
+To run this module, you need:
 
-- An AKS cluster with [Azure AD enabled](https://learn.microsoft.com/en-us/azure/aks/managed-aad)
 - cluster admin permissions on the cluster
 - [Terraform installed](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 - [kubectl installed](https://kubernetes.io/docs/tasks/tools/#kubectl)
+
+To integrate an AKS cluster, you additionally need:
+
+- An AKS cluster with [Azure AD enabled](https://learn.microsoft.com/en-us/azure/aks/managed-aad)
 
 ## How to Use This Module
 
