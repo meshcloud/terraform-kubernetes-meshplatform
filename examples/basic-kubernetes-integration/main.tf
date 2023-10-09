@@ -3,6 +3,6 @@ provider "kubernetes" {
   config_context = "..." # Name of the config context
 }
 
-module "aks_meshplatform" {
+module "meshplatform" {
   source = "../.."
 }
