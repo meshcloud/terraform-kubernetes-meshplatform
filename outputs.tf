@@ -5,7 +5,7 @@ output "metering_token" {
 }
 
 output "metering_expose_token" {
-  value = module.meshcloud-service-account-meshfed-metering.0.expose_token
+  value = "Expose the token with: terraform output -json metering_token"
 }
 
 
@@ -17,5 +17,5 @@ output "replicator_token" {
 }
 
 output "replicator_expose_token" {
-  value = module.meshcloud-service-account-meshfed-replicator.0.expose_token
+  value = "Expose the token with: terraform output -json replicator_token"
 }
