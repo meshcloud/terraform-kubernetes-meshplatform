@@ -8,16 +8,19 @@ resource "kubernetes_service_account" "meshfed_service" {
       "io.meshcloud/meshstack.replicator-kubernetes.version" = "1.0"
     }
   }
-  secret {
-    name = kubernetes_secret.meshfed_service_secret.metadata.0.name
-  }
 }
 
 # meshfed_service secret
 resource "kubernetes_secret" "meshfed_service_secret" {
   metadata {
-    name = "meshfed-service"
+    name      = "meshfed-service"
+    namespace = var.namespace
+    annotations = {
+      "kubernetes.io/service-account.name" = kubernetes_service_account.meshfed_service.metadata[0].name
+    }
   }
+
+  type = "kubernetes.io/service-account-token"
 }
 
 
