@@ -7,16 +7,19 @@ resource "kubernetes_service_account" "meshfed_metering" {
       "io.meshcloud/meshstack.metering-kubernetes.version" = "1.0"
     }
   }
-  secret {
-    name = kubernetes_secret.meshfed_metering_secret.metadata.0.name
-  }
 }
 
 # meshfed_metering secret
 resource "kubernetes_secret" "meshfed_metering_secret" {
   metadata {
-    name = "meshfed-metering"
+    name      = "meshfed-metering"
+    namespace = var.namespace
+    annotations = {
+      "kubernetes.io/service-account.name" = kubernetes_service_account.meshfed_metering.metadata[0].name
+    }
   }
+
+  type = "kubernetes.io/service-account-token"
 }
 
 ###
