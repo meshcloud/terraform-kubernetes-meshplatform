@@ -70,6 +70,17 @@ resource "kubernetes_cluster_role" "meshfed-service" {
     verbs          = ["bind"]
     resource_names = ["admin", "edit", "view"]
   }
+
+  dynamic "rule" {
+    for_each = var.additional_rules
+    content {
+      api_groups        = rule.value.api_groups
+      resources         = rule.value.resources
+      verbs             = rule.value.verbs
+      resource_names    = rule.value.resource_names
+      non_resource_urls = rule.value.non_resource_urls
+    }
+  }
 }
 
 # meshfed_service role binding

@@ -36,6 +36,18 @@ resource "kubernetes_cluster_role" "meshfed-metering" {
     resources  = ["pods", "persistentvolumeclaims"]
     verbs      = ["get", "list"]
   }
+
+  dynamic "rule" {
+    for_each = var.additional_rules
+    content {
+      api_groups        = rule.value.api_groups
+      resources         = rule.value.resources
+      verbs             = rule.value.verbs
+      resource_names    = rule.value.resource_names
+      non_resource_urls = rule.value.non_resource_urls
+    }
+  }
+
 }
 
 # meshfed_metering role binding
