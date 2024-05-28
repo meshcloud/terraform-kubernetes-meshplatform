@@ -13,6 +13,7 @@ To run this module, you need:
 To integrate an AKS cluster, you additionally need:
 
 - An AKS cluster with [Azure AD enabled](https://learn.microsoft.com/en-us/azure/aks/managed-aad)
+- Integrate [RBAC based user access](https://learn.microsoft.com/en-us/azure/aks/manage-azure-rbac) with the AKS cluster
 
 ## How to Use This Module
 
