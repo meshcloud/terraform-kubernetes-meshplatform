@@ -1,21 +1,10 @@
 name: Terraform CI
-
-on: push
+on:
+  push:
+  pull_request:
+  merge_group:
+    types: [checks_requested]
 
 jobs:
-  validate:
-    name: Validate
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v1
-
-    - uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: ^1.3
-
-    - run: terraform init
-
-    - run: terraform validate
-
-    - run: terraform fmt -recursive -check
+  build:
+    uses: meshcloud/shared-workflows/.github/workflows/terraform-meshplatform-modules-build-workflow.yml@main
