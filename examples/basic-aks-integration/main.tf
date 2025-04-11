@@ -44,14 +44,14 @@ provider "kubernetes" {
   config_path    = "~/.kube/config"
   config_context = "aks-demo-cluster"
 }
-
 module "aks_meshplatform" {
-  source = "git@github.com:meshcloud/terraform-kubernetes-meshplatform.git"
+  source = "git::https://github.com/meshcloud/terraform-kubernetes-meshplatform.git"
 
   depends_on = [
     azurerm_kubernetes_cluster.aks-demo-cluster
   ]
 }
+
 
 ## METERING
 output "metering_token" {
