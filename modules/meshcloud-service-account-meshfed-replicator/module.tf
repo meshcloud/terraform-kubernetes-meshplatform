@@ -2,7 +2,7 @@
 # meshfed_service service account
 resource "kubernetes_service_account" "meshfed_service" {
   metadata {
-    name      = "meshfed-service"
+    name      = var.name_suffix != "" ? "meshfed-service-${var.name_suffix}" : "meshfed-service"
     namespace = var.namespace
     annotations = {
       "io.meshcloud/meshstack.replicator-kubernetes.version" = "1.0"
@@ -10,10 +10,16 @@ resource "kubernetes_service_account" "meshfed_service" {
   }
 }
 
+# Moved blocks for smooth upgrades from count-less to count-based resources
+moved {
+  from = kubernetes_cluster_role.meshfed-service
+  to   = kubernetes_cluster_role.meshfed-service[0]
+}
+
 # meshfed_service secret
 resource "kubernetes_secret" "meshfed_service_secret" {
   metadata {
-    name      = "meshfed-service"
+    name      = var.name_suffix != "" ? "meshfed-service-${var.name_suffix}" : "meshfed-service"
     namespace = var.namespace
     annotations = {
       "kubernetes.io/service-account.name" = kubernetes_service_account.meshfed_service.metadata[0].name
@@ -25,8 +31,10 @@ resource "kubernetes_secret" "meshfed_service_secret" {
 
 
 ###
-# meshfed_service cluster role
+# meshfed_service cluster role (shared across all instances)
 resource "kubernetes_cluster_role" "meshfed-service" {
+  count = var.existing_clusterrole_name != "" ? 0 : 1
+
   metadata {
     name = "meshfed-service"
     annotations = {
@@ -83,20 +91,20 @@ resource "kubernetes_cluster_role" "meshfed-service" {
   }
 }
 
-# meshfed_service role binding
+# meshfed_service role binding (unique per instance)
 resource "kubernetes_cluster_role_binding" "meshfed-service" {
   subject {
     kind      = "ServiceAccount"
-    name      = "meshfed-service"
+    name      = kubernetes_service_account.meshfed_service.metadata[0].name
     namespace = var.namespace
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name      = "meshfed-service"
+    name      = var.existing_clusterrole_name != "" ? var.existing_clusterrole_name : "meshfed-service"
   }
   metadata {
-    name = "meshfed-service"
+    name = var.name_suffix != "" ? "meshfed-service-${var.name_suffix}" : "meshfed-service"
     annotations = {
       "io.meshcloud/meshstack.replicator-kubernetes.version" = "1.0"
     }
